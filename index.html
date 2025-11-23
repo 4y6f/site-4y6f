@@ -1,419 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Discord Bot and Front-End Developer" />
-  <title>duo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Discord Bot and Front-End Developer" />
+  <title>duo</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <style>
-    :root {
-      --bg: #000000;
-      --card-bg: rgba(255 255 255 / 0.1);
-      --text-primary: #f5f5f5;
-      --text-secondary: #bbbbbb;
-      --accent: #e63946; /* minimal red */
-      --accent-light: #f77f83;
-      --accent-glow: rgba(230, 57, 70, 0.6);
-      --shadow: rgba(0, 0, 0, 0.8);
-      --glass-blur: 12px;
-      --radius: 12px;
-      --transition: 0.3s ease;
-    }
-
-    body.light {
-      --bg: #fefefe;
-      --card-bg: rgba(0 0 0 / 0.05);
-      --text-primary: #111;
-      --text-secondary: #444;
-      --shadow: rgba(0, 0, 0, 0.1);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text-primary);
-      padding: 2rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      transition: background var(--transition), color var(--transition);
-      position: relative;
-      user-select: none;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.9);
-      pointer-events: none;
-      z-index: -1;
-      transition: background 0.3s ease;
-    }
-
-    body.light::before {
-      background: rgba(255, 255, 255, 0.95);
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-      text-shadow: 0 0 6px rgba(0,0,0,0.8);
-    }
-
-    body.light header {
-      text-shadow: 0 0 6px rgba(255,255,255,0.8);
-    }
-
-    header h1 {
-      font-size: 3rem;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .subtitle {
-      margin-top: 0.5rem;
-      font-size: 1.2rem;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    .theme-toggle {
-      margin: 2rem 0 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .toggle-icon {
-      width: 36px;
-      height: 36px;
-      position: relative;
-    }
-
-    .toggle-icon::after {
-      position: absolute;
-      bottom: -1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      pointer-events: none;
-    }
-
-    .toggle-icon:hover::after {
-      opacity: 1;
-    }
-
-    .icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      stroke: var(--text-primary);
-      stroke-width: 2;
-      fill: none;
-      transition: opacity var(--transition);
-      pointer-events: none;
-    }
-
-    .sun { opacity: 1; }
-    .moon { opacity: 0; }
-    body.light .sun { opacity: 0; }
-    body.light .moon { opacity: 1; }
-
-    #themeCheckbox {
-      position: absolute;
-      width: 36px;
-      height: 36px;
-      opacity: 0;
-      cursor: pointer;
-      margin: 0;
-      padding: 0;
-      z-index: 10;
-    }
-
-    /* New Styles for Profile Content */
-    .profile-section {
-        max-width: 600px;
-        width: 100%;
-        margin: 2rem auto;
-        text-align: center;
-        padding: 0 1rem;
-        z-index: 1; /* Keep it above the background effect */
+  <style>
+    :root {
+      --bg: #0c0c0c;
+      --card-bg: rgba(255 255 255 / 0.06);
+      --text-primary: #f5f5f5;
+      --text-secondary: #bbbbbb;
+      --accent: #ff4d5a;
+      --accent-light: #ff7b85;
+      --shadow: rgba(0, 0, 0, 0.4);
+      --glass-blur: 8px;
+      --radius: 12px;
+      --transition: 0.25s ease;
     }
 
-    .lanyard-badge {
-        display: block;
-        margin: 0 auto 0.5rem;
-        /* The lanyard image itself contains the Discord activity status */
+    /* Light Theme */
+    body.light {
+      --bg: #fefefe;
+      --card-bg: rgba(0 0 0 / 0.06);
+      --text-primary: #111;
+      --text-secondary: #444;
+      --shadow: rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    header h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      margin: 1.6rem 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .toggle-icon {
+      width: 36px;
+      height: 36px;
+      position: relative;
+      display: inline-block;
+    }
+
+    #themeCheckbox {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      stroke: var(--text-primary);
+      stroke-width: 2;
+      fill: none;
+      transition: opacity var(--transition);
+      pointer-events: none;
+    }
+
+    .sun { opacity: 1; }
+    .moon { opacity: 0; }
+    body.light .sun { opacity: 0; }
+    body.light .moon { opacity: 1; }
+
+    /* Profile Section */
+    .profile-section {
+      max-width: 700px;
+      width: 100%;
+      text-align: center;
+      margin: 2rem auto;
     }
 
     .profile-info {
-        margin-top: 1rem;
-        line-height: 1.6;
-        color: var(--text-secondary);
+      margin-top: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
     }
 
     .social-links {
-        margin-top: 1.5rem;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.75rem;
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
     }
 
     .skills-badges {
-        margin-top: 1.5rem;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.75rem;
-    }
-    
-    .container {
-      max-width: 900px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      z-index: 1;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 2rem;
-      box-shadow: 0 8px 20px var(--shadow);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
-      border: 1px solid transparent;
-      transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-      color: var(--text-primary);
-      position: relative;
-      z-index: 0;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      background-color: rgba(230 57 70 / 0.15);
-      border-color: var(--accent-light);
-      box-shadow: 0 0 15px 5px var(--accent-glow);
-      z-index: 1;
-    }
-
-    .card h2 {
-      font-size: 1.6rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 0.5rem;
-      text-shadow: 0 0 6px var(--accent-glow);
-    }
-
-    .card p,
-    .card ul {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: var(--text-secondary);
-    }
-
-    .card ul {
-      padding-left: 1.2rem;
-    }
-
-    .card ul li {
-      margin-bottom: 0.5rem;
-    }
-    /* Ensure images in cards (like skills) are sized correctly */
-    .card img {
-        max-width: 100%;
-        height: auto;
+      margin-top: 1.3rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
     }
 
+    hr {
+      border: none;
+      border-top: 1px solid var(--card-bg);
+      width: 50%;
+      opacity: 0.5;
+      margin: 1.8rem auto;
+    }
 
-    footer {
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      text-align: center;
-      user-select: none;
-      text-shadow: 0 0 4px rgba(0,0,0,0.5);
-    }
+    /* Main cards */
+    .container {
+      max-width: 700px;
+      width: 100%;
+      margin-top: 1rem;
+    }
 
-    body.light footer {
-      text-shadow: 0 0 4px rgba(255,255,255,0.3);
-    }
+    .card {
+      background: var(--card-bg);
+      padding: 1.7rem;
+      border-radius: var(--radius);
+      backdrop-filter: blur(var(--glass-blur));
+      box-shadow: 0 4px 12px var(--shadow);
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+    }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      transition: color var(--transition);
-    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(255, 77, 90, 0.28);
+      border-color: var(--accent-light);
+    }
 
-    a:hover {
-      color: var(--accent-light);
-    }
+    .card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.4rem;
+    }
 
-    @media (max-width: 600px) {
-      header h1 { font-size: 2.4rem; }
-      .card h2 { font-size: 1.3rem; }
-    }
+    .card ul {
+      margin-top: 0.5rem;
+      padding-left: 1.2rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
 
-    @media (max-width: 480px) {
-      .card {
-        padding: 1.25rem;
-      }
-    }
-  </style>
+    footer {
+      margin-top: 2.5rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      color: var(--accent-light);
+    }
+  </style>
 </head>
 
 <body>
-  <header>
-    <h1>duo</h1>
-    <div class="subtitle">hi im duo</div>
-  </header>
+  <header>
+    <h1>duo</h1>
+    <div class="subtitle">hi im duo</div>
+  </header>
 
-  <div class="theme-toggle" aria-label="Toggle Light or Dark Mode">
-    <label class="toggle-icon" for="themeCheckbox" tabindex="0" role="button" aria-pressed="false">
-      <input type="checkbox" id="themeCheckbox" aria-checked="false" />
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <label class="toggle-icon" for="themeCheckbox" tabindex="0" role="button">
+      <input type="checkbox" id="themeCheckbox" />
+      <svg class="icon sun" viewBox="0 0 24 24" width="36" height="36">
+        <circle cx="12" cy="12" r="5" />
+        <g stroke-linecap="round" stroke-width="2">
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </g>
+      </svg>
 
-      <svg class="icon sun" viewBox="0 0 24 24" width="36" height="36" aria-hidden="true">
-        <circle cx="12" cy="12" r="5" />
-        <g stroke-linecap="round" stroke-width="2">
-          <line x1="12" y1="1" x2="12" y2="3" />
-          <line x1="12" y1="21" x2="12" y2="23" />
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-          <line x1="1" y1="12" x2="3" y2="12" />
-          <line x1="21" y1="12" x2="23" y2="12" />
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-        </g>
-      </svg>
+      <svg class="icon moon" viewBox="0 0 24 24" width="36" height="36">
+        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
+      </svg>
+    </label>
+  </div>
 
-      <svg class="icon moon" viewBox="0 0 24 24" width="36" height="36" aria-hidden="true">
-        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
-      </svg>
-    </label>
-  </div>
-
+  <!-- Profile Section -->
   <section class="profile-section">
     <h1>About Me:</h1>
 
-    <a href="https://discord.com/users/962537652870070292" target="_blank" rel="noopener noreferrer">
-      <img src="https://lanyard.cnrad.dev/api/962537652870070292?borderRadius=&idleMessage=&bg=000000" alt="Discord Lanyard Status" class="lanyard-badge" />
+    <a href="https://discord.com/users/962537652870070292" target="_blank">
+      <img src="https://lanyard.cnrad.dev/api/962537652870070292?borderRadius=&idleMessage=&bg=000000"
+           alt="Discord Lanyard Status" class="lanyard-badge" />
     </a>
-      
-    <a href="https://github.com/4y6f" title="GitHub Profile" target="_blank" rel="noopener noreferrer">
-      <img src="https://komarev.com/ghpvc/?username=4y6f&color=blueviolet" alt="Profile Views" style="vertical-align: middle; margin-left: 0.5rem;" />
+
+    <a href="https://github.com/4y6f" target="_blank">
+      <img src="https://komarev.com/ghpvc/?username=4y6f&color=blueviolet"
+           alt="Profile Views" style="vertical-align: middle; margin-left: 0.5rem;" />
     </a>
-      
+
     <div class="profile-info">
       <p>
         <strong>&lt;&lt; Developer For Hire &gt;&gt;</strong><br>
-        <strong>&lt;&lt; dm me for more info</a> &gt;&gt;</strong>
-
-
+        <strong>&lt;&lt; dm me for more info &gt;&gt;</strong>
       </p>
+
       <p>
-        <strong><a href="https://4y6f.pages.dev/" target="_blank">https://4y6f.pages.dev</a></strong><br>
+        <strong><a href="https://4y6f.pages.dev" target="_blank">https://4y6f.pages.dev</a></strong><br>
         <strong>Email Me: <a href="mailto:4y6fbusiness@gmail.com">4y6fbusiness@gmail.com</a></strong>
       </p>
     </div>
 
-    <hr style="width: 50%; margin: 1.5rem auto; border-color: var(--card-bg); opacity: 0.5;">
+    <hr>
 
     <div class="social-links">
-        <a href="https://open.spotify.com/user/31wgieoa3kism6gvwstxphgmh6xe?si=93fe0ef679dd4a78" target="_blank" rel="noopener noreferrer">
-            <img src="https://img.shields.io/badge/Spotify-%231DB954.svg?style=for-the-badge&logo=spotify&logoColor=white" alt="Spotify">
-        </a>
-        </a>
-        <a href="https://www.roblox.com/users/1642813895/profile" target="_blank" rel="noopener noreferrer">
-            <img src="https://img.shields.io/badge/Roblox-%23000000.svg?style=for-the-badge&logo=roblox&logoColor=white" alt="Roblox">
-        </a>
+      <a href="https://open.spotify.com/user/31wgieoa3kism6gvwstxphgmh6xe?si=93fe0ef679dd4a78" target="_blank">
+        <img src="https://img.shields.io/badge/Spotify-%231DB954.svg?style=for-the-badge&logo=spotify&logoColor=white">
+      </a>
+
+      <a href="https://www.roblox.com/users/1642813895/profile" target="_blank">
+        <img src="https://img.shields.io/badge/Roblox-%23000000.svg?style=for-the-badge&logo=roblox&logoColor=white">
+      </a>
     </div>
 
-    <h3 align="center" style="margin-top: 2rem;"> Skills </h3>
+    <h3 style="margin-top: 2rem;">Skills</h3>
     <div class="skills-badges">
-        <img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" alt="Node JS">
-        <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-
+      <img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white">
+      <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white">
     </div>
-
   </section>
-    <main class="container">
-    <section class="card">
-      <h2>Skills</h2>
-      <ul>
-        <li>Discord Bot Development (Python)</li>
-        <li>Front-End Development (HTML, CSS, JS)</li>
-        <li>API Integrations</li>
-      </ul>
-    </section>
 
-    <section class="card">
-      <h2>Services</h2>
+  <!-- Main Content -->
+  <main class="container">
+    <section class="card">
+      <h2>Skills</h2>
       <ul>
-        <li>Bot Development</li>
-        <li>Front-End Website Development</li>
-        <li>Discord Services (embeds, bots, server setup, etc.)</li>
+        <li>Discord Bot Development (Python)</li>
+        <li>Front-End Development (HTML, CSS, JS)</li>
+        <li>API Integrations</li>
       </ul>
-    </section>
-  <footer>
-    © duo (4y6f) 2025. All Rights Reserved.
-  </footer>
+    </section>
 
-  <script>
-    const checkbox = document.getElementById('themeCheckbox');
-    const body = document.body;
-    const toggleLabel = document.querySelector('.theme-toggle label');
+    <section class="card">
+      <h2>Services</h2>
+      <ul>
+        <li>Bot Development</li>
+        <li>Front-End Website Development</li>
+        <li>Discord Services (embeds, bots, server setup, etc.)</li>
+      </ul>
+    </section>
+  </main>
 
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light' || (!savedTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-      body.classList.add('light');
-      checkbox.checked = true;
-      checkbox.setAttribute('aria-checked', 'true');
-      toggleLabel.setAttribute('aria-pressed', 'true');
-    }
+  <footer>
+    © duo (4y6f) 2025. All Rights Reserved.
+  </footer>
 
-    checkbox.addEventListener('change', () => {
-      const isLight = checkbox.checked;
-      body.classList.toggle('light', isLight);
-      checkbox.setAttribute('aria-checked', isLight.toString());
-      toggleLabel.setAttribute('aria-pressed', isLight.toString());
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    });
+  <script>
+    const checkbox = document.getElementById('themeCheckbox');
+    const body = document.body;
 
-    toggleLabel.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        checkbox.checked = !checkbox.checked;
-        checkbox.dispatchEvent(new Event('change'));
-      }
-    });
-  </script>
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light' || (!savedTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      body.classList.add('light');
+      checkbox.checked = true;
+    }
+
+    checkbox.addEventListener('change', () => {
+      const isLight = checkbox.checked;
+      body.classList.toggle('light', isLight);
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  </script>
 </body>
 </html>
