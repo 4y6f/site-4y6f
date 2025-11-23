@@ -22,7 +22,6 @@
       --transition: 0.25s ease;
     }
 
-    /* Light Theme */
     body.light {
       --bg: #fefefe;
       --card-bg: rgba(0 0 0 / 0.06);
@@ -66,7 +65,6 @@
       color: var(--text-secondary);
     }
 
-    /* Theme Toggle */
     .theme-toggle {
       margin: 1.6rem 0;
       display: flex;
@@ -108,7 +106,6 @@
     body.light .sun { opacity: 0; }
     body.light .moon { opacity: 1; }
 
-    /* Profile Section */
     .profile-section {
       max-width: 700px;
       width: 100%;
@@ -144,44 +141,6 @@
       width: 50%;
       opacity: 0.5;
       margin: 1.8rem auto;
-    }
-
-    /* Main cards */
-    .container {
-      max-width: 700px;
-      width: 100%;
-      margin-top: 1rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      padding: 1.7rem;
-      border-radius: var(--radius);
-      backdrop-filter: blur(var(--glass-blur));
-      box-shadow: 0 4px 12px var(--shadow);
-      margin-bottom: 1.5rem;
-      transition: var(--transition);
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 16px rgba(255, 77, 90, 0.28);
-      border-color: var(--accent-light);
-    }
-
-    .card h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
-      color: var(--accent);
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 0.4rem;
-    }
-
-    .card ul {
-      margin-top: 0.5rem;
-      padding-left: 1.2rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
     }
 
     footer {
@@ -238,14 +197,20 @@
   <section class="profile-section">
     <h1>About Me:</h1>
 
+    <!-- FIXED IMAGE (Lanyard) -->
     <a href="https://discord.com/users/962537652870070292" target="_blank">
-      <img src="https://lanyard.cnrad.dev/api/962537652870070292?borderRadius=&idleMessage=&bg=000000"
-           alt="Discord Lanyard Status" class="lanyard-badge" />
+      <img
+        src="https://lanyard.cnrad.dev/api/962537652870070292?bg=000000"
+        alt="Discord Lanyard Status"
+        class="lanyard-badge"
+        style="border-radius: 8px;"
+      />
     </a>
 
     <a href="https://github.com/4y6f" target="_blank">
       <img src="https://komarev.com/ghpvc/?username=4y6f&color=blueviolet"
-           alt="Profile Views" style="vertical-align: middle; margin-left: 0.5rem;" />
+           alt="Profile Views"
+           style="vertical-align: middle; margin-left: 0.5rem;" />
     </a>
 
     <div class="profile-info">
@@ -278,27 +243,6 @@
       <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white">
     </div>
   </section>
-
-  <!-- Main Content -->
-  <main class="container">
-    <section class="card">
-      <h2>Skills</h2>
-      <ul>
-        <li>Discord Bot Development (Python)</li>
-        <li>Front-End Development (HTML, CSS, JS)</li>
-        <li>API Integrations</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>Services</h2>
-      <ul>
-        <li>Bot Development</li>
-        <li>Front-End Website Development</li>
-        <li>Discord Services (embeds, bots, server setup, etc.)</li>
-      </ul>
-    </section>
-  </main>
 
   <footer>
     © duo (4y6f) 2025. All Rights Reserved.
